@@ -1,0 +1,292 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{hyperref}
+\usepackage[capitalise,nameinlink,noabbrev]{cleveref}
+
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\E}{\mathbb E}
+\renewcommand{\P}{\mathbb P}
+\newcommand{\1}{\mathbf 1}
+
+\title{A third-moment criterion for the odometer of\\
+subcritical activated random walk on $\Z$}
+\author{Yitzchak Shmalo\\
+Einstein Institute of Mathematics, The Hebrew University of Jerusalem\\
+Givat Ram, Jerusalem, Israel\\
+\texttt{yitzchak.shmalo@gmail.com}}
+\date{19 November 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Consider activated random walk on $\Z$ with sleep rate $\lambda>0$, started from independent and identically distributed numbers of active particles whose mean lies below the critical density. We show that the expected odometer at the origin is finite if and only if the number of particles per site has a finite third moment. For Bernoulli initial configurations finiteness was proved by Johnson and Richey, who conjectured tentatively that finite variance is the right condition in general; this is false, and an explicit law with finite variance and infinite expected odometer is given. The lower bound holds for every translation-invariant initial law and comes from a martingale that charges each particle the square of its displacement. The upper bound routes the particles onto an independent Bernoulli configuration of slightly larger density and then applies the Bernoulli result.
+\end{abstract}
+
+\noindent\textbf{Keywords:} activated random walk, odometer, self-organized criticality, abelian property, least action principle.
+
+\noindent\textbf{MSC 2020:} 60K35, 82C22.
+
+\section{Introduction}
+
+Activated random walk (ARW) is an interacting particle system (see \cite{DRS} for its background and conjectures) in which particles are either active or sleeping. An active particle performs a continuous-time simple random walk and falls asleep at rate $\lambda$ when it is alone on its site; a sleeping particle does not move and is woken when an active particle jumps onto its site. We refer to the survey of Rolla \cite{Ro} for the construction of the model from stacks of instructions, the abelian property, and the existence of a critical density $\zeta_c(\lambda)$: for a translation-ergodic initial configuration of density $\zeta<\zeta_c$ the system fixates almost surely, and for $\zeta>\zeta_c$ it stays active almost surely. That $\zeta_c$ is the same for all such initial laws is due to Rolla, Sidoravicius and Zindy \cite{RSZ}; see \cite[Theorem~2.13]{Ro}.
+
+The odometer $m(x)$ counts the instructions executed at the site $x$ during stabilization, that is, the jumps away from $x$ together with the attempts to fall asleep at $x$. Among the open problems listed by Rolla is the question of when $\E[m(0)]<\infty$, beyond the condition $\zeta<\zeta_c$ \cite[p.~517]{Ro}. Johnson and Richey \cite{JR} proved that on $\Z$, for i.i.d.\ Bernoulli$(\rho)$ initial configurations of active particles with $\rho<\zeta_c(\lambda)$, the odometer at the origin has a stretched exponential tail, so in particular $\E_\rho[m(0)]<\infty$, where $\E_\rho$ denotes expectation for this initial configuration \cite[Theorem~1.1 and Corollary~1.2]{JR}. They observe that this cannot hold for every i.i.d.\ initial law, since the expected odometer is at least a constant times $\E[\sigma_0^2]$, where $\sigma_0$ is the initial number of particles at the origin, and they conjecture tentatively that the odometer has finite expectation if and only if the number of particles per site has finite variance \cite[Section~1]{JR}.
+
+We show that the correct moment is the third one.
+
+\begin{theorem}\label{thm:main}
+Let $\lambda>0$ and let $(\sigma_x)_{x\in\Z}$ be i.i.d.\ random variables with values in $\N=\{0,1,2,\dots\}$ and mean $\zeta<\zeta_c(\lambda)$. Consider ARW on $\Z$ with nearest-neighbour symmetric jumps, sleep rate $\lambda$, and initial configuration consisting of $\sigma_x$ active particles at each site $x$. Then
+\[
+\E[m(0)]<\infty \quad\Longleftrightarrow\quad \E[\sigma_0^3]<\infty .
+\]
+\end{theorem}
+
+The two directions are proved separately and under different hypotheses. Let
+\[
+Q(k)=\min\Bigl\{\sum_{i=1}^k z_i^2:\ z_1,\dots,z_k\in\Z \text{ distinct}\Bigr\},
+\]
+the sum of the $k$ smallest squared distances from $0$ among distinct integers. Summing $0^2+2\cdot1^2+2\cdot2^2+\cdots$ gives $Q(0)=0$ and
+\begin{equation}\label{eq:Q}
+Q(k)=\begin{cases}
+k(k^2-1)/12, & k \text{ odd},\\
+k(k^2+2)/12, & k \text{ even},
+\end{cases}
+\end{equation}
+so that $Q(k)\ge (k^3-k)/12$ for all $k\ge0$.
+
+\begin{proposition}\label{prop:lower}
+Let $\lambda>0$ and let $(\sigma_x)_{x\in\Z}$ be any translation-invariant random configuration of active particles with $\sigma_x<\infty$ almost surely. Then
+\[
+\E[m(0)]\ \ge\ (1+\lambda)\,\E\bigl[Q(\sigma_0)\bigr]\ \ge\ \frac{1+\lambda}{12}\,\E\bigl[\sigma_0^3-\sigma_0\bigr].
+\]
+\end{proposition}
+
+\begin{proposition}\label{prop:upper}
+Under the hypotheses of \cref{thm:main}, if $\E[\sigma_0^3]<\infty$ then $\E[m(0)]<\infty$.
+\end{proposition}
+
+\Cref{prop:lower} uses no estimate on the subcritical phase. \Cref{prop:upper} uses the theorem of Johnson and Richey at a density $r$ with $\zeta<r<\zeta_c(\lambda)$. Together they give \cref{thm:main}. The lower bound also gives an explicit counterexample to the tentative conjecture of Johnson and Richey.
+
+\begin{corollary}\label{cor:example}
+Let $\lambda>0$, $q=\lambda/(1+\lambda)$, and let $\sigma_0$ have the law
+\[
+\P(\sigma_0=2^j)=q\,2^{-3j}\quad (j=1,2,\dots),\qquad \P(\sigma_0=0)=1-q/7 .
+\]
+Then $\E[\sigma_0]=q/3$, $\E[\sigma_0^2]=q$ and $\E[\sigma_0^3]=\infty$. For the i.i.d.\ configuration with this marginal law the system fixates almost surely, and $\E[m(0)]=\infty$.
+\end{corollary}
+
+\begin{proof}
+The three moments are $q\sum_{j\ge1}2^{-2j}=q/3$, $q\sum_{j\ge1}2^{-j}=q$ and $q\sum_{j\ge1}1=\infty$. On $\Z$ one has $\zeta_c(\lambda)\ge\lambda/(1+\lambda)=q$, a bound due to Rolla and Sidoravicius \cite{RS} (see \cite[Theorem~4.1]{Ro}), so the density $q/3$ is subcritical and the system fixates almost surely \cite[Theorem~2.13]{Ro}. By \cref{prop:lower}, $\E[m(0)]\ge(1+\lambda)\E[\sigma_0^3-\sigma_0]/12=\infty$.
+\end{proof}
+
+The proof of \cref{prop:lower} counts the displacement of each particle rather than visits to its starting site: a pile of $k$ particles must spread over $k$ distinct sites, at total squared distance of order $k^3$, and a symmetric walk pays for squared displacement with jumps. The theorem of Johnson and Richey does not apply directly to a site holding many particles, so the proof of \cref{prop:upper} works in a finite interval and first moves the particles one at a time, by acceptable topplings (defined in \cref{sec:setting}), each until it reaches an occupied site of an independent Bernoulli$(r)$ configuration not yet used by an earlier particle, or leaves the interval. The cost of this routing is controlled by a random-walk supremum that has a finite second moment when $\sigma_0$ has a finite third moment, and what is left is compared with the Bernoulli configuration. Embedding a configuration into one of higher density is also how the universality of $\zeta_c$ is proved \cite{RSZ}, \cite[Section~8]{Ro}.
+
+The same exponent appears for the divisible sandpile. Bou-Rabee, Peres and Sava-Huss \cite{BPS} showed that for the divisible sandpile on $\Z^d$ with i.i.d.\ initial masses, $\E[(\sigma_0^+)^{1+2/d}]=\infty$ forces the expected odometer to be infinite \cite[Lemma~8.2]{BPS}, and that on bounded-degree graphs a finite $p$-th moment with $p>3$ and mean below the threshold gives a finite expected odometer \cite[Theorem~1.3]{BPS}. On $\Z$ both exponents equal three. The particle--hole model corresponds to ARW with infinite sleep rate \cite[Section~10.3]{Ro}. For it, Bou-Rabee and Panagiotis \cite{BP} showed that below the critical density, when the initial law has an exponential moment, the time a particle takes to settle has stretched exponential tails, so that the expected odometer is finite \cite[Theorem~1.1]{BP}. They also showed that a finite first moment alone does not suffice \cite[Remark~9.6]{BP}. \Cref{thm:main} is the corresponding statement for ARW, the model for which Johnson and Richey made their conjecture, and it includes the boundary case: the third moment itself is the condition.
+
+\section{Setting}\label{sec:setting}
+
+We use the site-wise representation of ARW from \cite[Section~2]{Ro}. Each site $x\in\Z$ carries an i.i.d.\ sequence of instructions $(\tau_{x,j})_{j\ge1}$ (the stack at $x$), independent over sites and of the initial configuration, each equal to a jump to $x-1$ or to $x+1$ with probability $\tfrac{1}{2(1+\lambda)}$ each, and to a sleep instruction with probability $\tfrac{\lambda}{1+\lambda}$. The state of a site is an element of $\{0,\mathfrak s,1,2,\dots\}$, where $\mathfrak s$ denotes one sleeping particle; a site is unstable when it holds at least one active particle. Toppling a site executes its next instruction: a jump moves one particle to the neighbouring site, waking a sleeping particle there; a sleep instruction puts the particle to sleep if it is alone and has no effect otherwise. Toppling an unstable site is legal. A toppling at a site holding at least one particle, active or sleeping, is acceptable; this includes the legal ones, and toppling a site in state $\mathfrak s$ wakes its particle before the instruction is executed \cite[Section~2.2]{Ro}. For a finite set $V\subseteq\Z$ and an initial configuration $\eta$, particles leaving $V$ are never toppled again, and $m_{V,\eta}(x)$ denotes the number of topplings at $x$ in any legal sequence of topplings in $V$ that stabilizes $\eta$ in $V$. We use three facts from \cite{Ro}:
+\begin{itemize}
+\item[(A)] (Abelian property and least action \cite[Lemmas~2.1 and~2.4]{Ro}; the construction was formalized in \cite{RS}.) $m_{V,\eta}$ does not depend on the legal stabilizing sequence, and $m_{V,\eta}\le m_\alpha$ for every acceptable sequence $\alpha$ that stabilizes $\eta$ in $V$, where $m_\alpha(x)$ is the number of topplings at $x$ in $\alpha$.
+\item[(B)] (Monotonicity \cite[Lemma~2.5]{Ro}.) If $V\subseteq\tilde V$ and $\eta\le\tilde\eta$ then $m_{V,\eta}\le m_{\tilde V,\tilde\eta}$, where states are ordered by $0<\mathfrak s<1<2<\cdots$.
+\item[(C)] The odometer $m$ described in the introduction is the monotone limit $m=\lim_{V\uparrow\Z}m_{V,\eta}$.
+\end{itemize}
+The odometer of Johnson and Richey is this $m$ \cite[Sections~1--2]{JR}. Since every instruction is a jump with probability $1/(1+\lambda)$, independently of the past, the expected number of topplings in a stabilization equals $1+\lambda$ times the expected number of jumps; this is the optional stopping theorem for the martingale (jumps) $-(1+\lambda)^{-1}$(topplings), applied at bounded times and passed to the limit by monotone convergence.
+
+Below, $I$ denotes a finite interval of $\Z$; in the proof of \cref{prop:lower}, $I=\{-a,\dots,a\}$ and $|I|=2a+1$.
+
+\section{The lower bound}
+
+\begin{proof}[Proof of \cref{prop:lower}]
+Fix $a$ and condition on the initial configuration in $I$, which has finitely many particles. Give each particle a label $\ell$, consisting of its starting site and its index within the pile there, and call it particle $\ell$. Stabilize the configuration in $I$ by the following legal procedure: at each step choose an active particle, by any rule depending on the past, and topple its site; if the instruction is a jump, the chosen particle is the one that moves. Because particles at a site are indistinguishable for the dynamics, this only assigns names, and by (A) the resulting counts are $m_{I,\sigma}$. A particle that jumps out of $I$ is killed and its position is frozen at its first position outside $I$.
+
+The procedure stops almost surely. Let $N_I$ be the number of particles in $I$. In a run of $N_I|I|$ consecutive topplings whose instructions are all jumps to the right, every particle that moves moves to the right. No particle can move to the right $|I|$ times without leaving $I$, so the procedure stops by the end of such a run. Given the past, each toppling is a jump to the right with probability $1/(2(1+\lambda))$, so a run of this kind occurs almost surely.
+
+For a particle $\ell$ with starting site $x$, let $D_\ell$ be its displacement and $J_\ell$ its number of jumps. Conditionally on the past, a toppling that moves $\ell$ moves it by $\pm1$ with equal probability, and every other toppling leaves $D_\ell$ and $J_\ell$ unchanged. Hence $D_\ell^2-J_\ell$ is a martingale for the filtration of the procedure. Let $T$ be the stopping step. Optional stopping at $T\wedge n$ gives $\E[D_\ell(T\wedge n)^2]=\E[J_\ell(T\wedge n)]$; since $|D_\ell|\le |I|+1$, dominated convergence on the left and monotone convergence on the right give $\E[D_\ell(T)^2]=\E[J_\ell(T)]$.
+
+Fix $L\ge1$ and a site $x\in I$ at distance at least $L$ from $\Z\setminus I$ with $k=\sigma_x\le L$. (On $\Z$ the condition $k\le L$ is used only to guarantee that the $k$ smallest values of $z^2$ over distinct integers are less than $L^2$.) At time $T$ the particles of the pile at $x$ that remain in $I$ are sleeping on distinct sites, and each killed particle has $|D_\ell|\ge L$. The $k$ smallest values of $z^2$ over distinct $z\in\Z$ are all at most $\lfloor k/2\rfloor^2<L^2$. Order the $k$ values $D_\ell(T)^2$ increasingly and let $s_i$ be the $i$-th smallest value of $z^2$ over distinct integers $z$. If one of the $i$ smallest values comes from a killed particle, the $i$-th smallest is at least $L^2>s_i$. Otherwise the $i$ smallest values are the squares of $i$ distinct integers, and the $i$-th smallest is at least $s_i$. Therefore $\sum_\ell D_\ell(T)^2\ge Q(k)$, the sum being over the particles of the pile at $x$. Summing over piles, each particle being counted once,
+\[
+\E\Bigl[\sum_{y\in I}m_{I,\sigma}(y)\Bigr]=(1+\lambda)\,\E\Bigl[\sum_\ell J_\ell(T)\Bigr]\ \ge\ (1+\lambda)\,(|I|-2L)\,\E\bigl[Q(\sigma_0)\1_{\{\sigma_0\le L\}}\bigr],
+\]
+using translation invariance for the last step. By (B) and (C), $m_{I,\sigma}(y)\le m(y)$, and by translation invariance $\E[m(y)]=\E[m(0)]$. Dividing by $|I|$ and letting $a\to\infty$ and then $L\to\infty$ gives $\E[m(0)]\ge(1+\lambda)\E[Q(\sigma_0)]$, by monotone convergence. The second inequality follows from \eqref{eq:Q}.
+\end{proof}
+
+\begin{remark}
+The proof works on $\Z^d$ for nearest-neighbour symmetric jumps and translation-invariant initial laws. Replace $D_\ell^2-J_\ell$ by $|D_\ell|^2-J_\ell$, which is again a martingale because a jump changes $|D_\ell|^2$ by $1$ in mean. Replace $Q$ by the sum $Q_d(k)$ of the $k$ smallest values of $|z|^2$ over distinct $z\in\Z^d$, and the condition $\sigma_x\le L$ by the condition that these $k$ values are less than $L^2$, which holds for $k\le L$ once $L$ is large enough depending on $d$. This gives $\E[m(0)]\ge(1+\lambda)\E[Q_d(\sigma_0)]$. At most $(2\sqrt t+1)^d$ points $z$ have $|z|^2\le t$, so the $j$-th smallest value of $|z|^2$ is at least $(j^{1/d}-1)^2/4$, and $Q_d(k)\ge c_d\,k^{1+2/d}-C_d\,k$ for constants $c_d,C_d>0$ depending only on $d$. Hence a finite expected odometer forces $\E[\sigma_0^{1+2/d}]<\infty$ on $\Z^d$, the exponent found for the divisible sandpile in \cite[Lemma~8.2]{BPS}.
+\end{remark}
+
+\section{The upper bound}
+
+Assume $\E[\sigma_0^3]<\infty$ and fix $r$ with $\zeta<r<\zeta_c(\lambda)$. Let $(B_x)_{x\in\Z}$ be i.i.d.\ Bernoulli$(r)$, independent of $\sigma$ and of all instructions; a site $x$ with $B_x=1$ is said to carry a mark. Set $\gamma=(r-\zeta)/2>0$ and
+\[
+Y_i=\sigma_i-B_i+\gamma ,\qquad \E[Y_i]=-\gamma,\qquad Y_i\ge -1 .
+\]
+For $x\in\Z$ let
+\[
+M_x^+=\sup_{n\ge0}\sum_{i=1}^n Y_{x+i},\qquad M_x^-=\sup_{n\ge0}\sum_{i=1}^n Y_{x-i},
+\qquad
+h_x=1+\Bigl\lceil \frac{\sigma_x+\gamma+M_x^++M_x^-}{\gamma}\Bigr\rceil,
+\]
+where the empty sum is $0$.
+
+\begin{lemma}\label{lem:sup}
+$\E[(M_0^+)^2]=\E[(M_0^-)^2]<\infty$.
+\end{lemma}
+
+Moment conditions for the supremum of a random walk with negative drift were studied by Kiefer and Wolfowitz \cite{KW}; we include the short proof of the case needed here.
+
+\begin{proof}
+Let $Y$ have the law of $Y_0$; recall that $Y_1,Y_2,\dots$ are i.i.d.\ with this law. Define $W_0=0$ and $W_{k+1}=(W_k+Y_{k+1})_+$. For $w\ge0$, the function $(w+Y)_+^3$ exceeds $(w+Y)^3$ only when $w+Y<0$, and then by at most $|w+Y|^3\le1$ because $Y\ge-1$. Hence
+\[
+\E\bigl[(w+Y)_+^3\bigr]-w^3\le -3\gamma w^2+3\E[Y^2]\,w+\E|Y|^3+1\le -\gamma w^2+C
+\]
+for a constant $C$, using $\E|Y|^3<\infty$, which follows from $\E[\sigma_0^3]<\infty$. Each $W_k$ is bounded by $|Y_1|+\cdots+|Y_k|$, so $\E[W_k^3]<\infty$, and taking expectations in the last display with $w=W_k$ and summing over $k$ gives
+\[
+\sum_{j=0}^{k-1}\E[W_j^2]\le \frac{Ck}{\gamma}.
+\]
+Unrolling the recursion and reversing the order of the first $j$ increments shows that $W_j$ has the law of $S^*_j=\max(0,S_1,\dots,S_j)$, where $S_n=Y_1+\cdots+Y_n$. Since $S^*_j$ is nondecreasing in $j$, so is $\E[(S^*_j)^2]=\E[W_j^2]$. Taking $k=2n$ and keeping only the terms with $j\ge n$ gives $n\,\E[(S^*_n)^2]\le 2Cn/\gamma$, that is, $\E[(S^*_n)^2]\le 2C/\gamma$ for every $n$. The supremum $M_0^+$ has the law of $\lim_j S^*_j$, so $\E[(M_0^+)^2]\le2C/\gamma$ by monotone convergence. The same holds for $M_0^-$.
+\end{proof}
+
+Since $M_x^\pm$ are functions of $(\sigma_y,B_y)_{y\ne x}$, they are independent of $\sigma_x$. Expanding $h_x^2\le C'(1+\sigma_x^2+(M_x^+)^2+(M_x^-)^2)$ and using \cref{lem:sup},
+\begin{equation}\label{eq:hmoment}
+K:=\E\bigl[\sigma_x h_x^2\bigr]\le C'\Bigl(\E[\sigma_0]+\E[\sigma_0^3]+2\,\E[\sigma_0]\,\E[(M_0^+)^2]\Bigr)<\infty,
+\end{equation}
+and $K$ does not depend on $x$.
+
+\begin{lemma}\label{lem:interval}
+There is a constant $C''$ such that $\sum_{y\in I}\E[m_{I,\sigma}(y)]\le C''|I|$ for every finite interval $I$.
+\end{lemma}
+
+\begin{proof}
+\emph{Routing.} Order the particles initially in $I$ in a fixed way and treat them one at a time. A particle is \emph{routed} as follows: if its current site carries a mark that has not yet been used, it stops there and the mark becomes used; otherwise its current site is toppled, the particle being the one that moves if the instruction is a jump, and the rule is applied again at the new site. A particle that leaves $I$ is killed. A sleep instruction either has no effect or puts the routed particle to sleep, in which case the next toppling of its site is acceptable. A routed particle passing a site occupied by a stopped particle wakes it; the stopped particle stays where it is. Thus routing is an acceptable sequence of topplings in $I$, and at its end each site of $I$ holds at most one particle, and only if it is marked. Writing $\eta'$ for the resulting configuration, $\eta'\le B$ on $I$ in the order of (B).
+
+\emph{Instructions.} We realize the instructions as follows. Each particle carries its own i.i.d.\ tape of instructions, independent of everything else, and during routing the instruction executed when the routed particle's site is toppled is the next unread instruction of that particle's tape. Since the site to be toppled and the particle are chosen before the instruction is read, and each instruction is read only once, the sequence of instructions read at each site, in the order they are read, is an i.i.d.\ sequence independent of $(\sigma,B)$. Indeed, given $(\sigma,B)$ and everything read before, each instruction read is a fresh draw with the law of \cref{sec:setting}, appended to the stack of a site chosen from the past; so routing has the same joint law with $(\sigma,B)$ as routing run directly on i.i.d.\ stacks. We let the stack at each site start with the instructions read there during routing and continue with a fresh independent i.i.d.\ sequence. This gives stacks with the law of \cref{sec:setting}, independent of $(\sigma,B)$. On these stacks routing is a sequence of topplings that reads exactly the first instructions of each stack. The unread parts of the tapes play no role in the dynamics; they are used only to bound the cost of routing.
+
+\emph{Comparison.} Follow routing by a legal stabilization of $\eta'$ in $I$ on the remaining parts of the stacks. The concatenation is an acceptable sequence that stabilizes $\sigma$ in $I$, so by (A) and then (B),
+\[
+\sum_{y\in I}m_{I,\sigma}(y)\le R_I+\sum_{y\in I}m'_{I,\eta'}(y)\le R_I+\sum_{y\in I}m'_{I,B}(y),
+\]
+where $R_I$ is the number of topplings performed during routing and $m'$ denotes odometers computed with the fresh parts of the stacks. These fresh parts are independent of $(\sigma,B)$ and of the routing, and $B$ is an i.i.d.\ Bernoulli$(r)$ configuration with $r<\zeta_c(\lambda)$, so by (B), (C) and \cite[Corollary~1.2]{JR},
+\[
+\E\Bigl[\sum_{y\in I}m'_{I,B}(y)\Bigr]\le |I|\,\E_r[m(0)]<\infty .
+\]
+
+\emph{The routing cost.} Let $U\subseteq I$ be the set of sites visited during routing, including the starting sites and the sites where particles stop. Let $G$ be a connected component of $U$, an interval. Every marked site of $G$ was visited, so its mark is used; every particle that used a mark in $G$ travelled inside $U$, hence inside $G$, and so started in $G$. Therefore
+\begin{equation}\label{eq:surplus}
+\sum_{z\in G}(\sigma_z-B_z)\ge0 .
+\end{equation}
+If $G\ni x$, then by \eqref{eq:surplus} and the definitions,
+\[
+\gamma|G|\le\sum_{z\in G}Y_z\le \sigma_x+\gamma+M_x^++M_x^- ,
+\]
+so $|G|<h_x$. A particle with starting site $x$ moves inside the component of $U$ containing $x$ until it stops or until its final jump out of $I$. Its trajectory is the walk driven by its own tape. Up to that moment the walk stays within distance $|G|-1\le h_x-2$ of $x$, where $G$ is that component. Hence the number of topplings it causes is at most the exit time from $\{x-h_x+1,\dots,x+h_x-1\}$ of the lazy walk read from its tape, which, given $(\sigma,B)$, has mean $(1+\lambda)h_x^2$: the simple random walk needs $h_x^2$ jumps in expectation to leave this set, and each jump costs on average $1+\lambda$ instructions. Since $h_x$ is a function of $(\sigma,B)$ and the tapes are independent of $(\sigma,B)$,
+\[
+\E[R_I]\le(1+\lambda)\sum_{x\in I}\E\bigl[\sigma_x h_x^2\bigr]\le(1+\lambda)K|I| .
+\]
+The lemma follows with $C''=(1+\lambda)K+\E_r[m(0)]$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{prop:upper}]
+Fix $l\ge0$. For each of the $|I|-2l$ sites $y$ with $\{y-l,\dots,y+l\}\subseteq I$, (B) and translation invariance give $\E[m_{I,\sigma}(y)]\ge \E[m_{\{-l,\dots,l\},\sigma}(0)]$. By \cref{lem:interval},
+\[
+(|I|-2l)\,\E\bigl[m_{\{-l,\dots,l\},\sigma}(0)\bigr]\le C''|I| .
+\]
+Letting $|I|\to\infty$ gives $\E[m_{\{-l,\dots,l\},\sigma}(0)]\le C''$, and letting $l\to\infty$ gives $\E[m(0)]\le C''$ by (C) and monotone convergence.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:main}]
+If $\E[\sigma_0^3]<\infty$, \cref{prop:upper} applies. If $\E[\sigma_0^3]=\infty$, then $\E[\sigma_0^3-\sigma_0]=\infty$ because $\E[\sigma_0]=\zeta<\infty$, and \cref{prop:lower} gives $\E[m(0)]=\infty$.
+\end{proof}
+
+\begin{remark}
+\Cref{prop:upper} uses the one-dimensional setting in two places: the theorem of Johnson and Richey, which is proved on $\Z$, and the fact that a connected set of visited sites is an interval, which turns the surplus condition \eqref{eq:surplus} into a bound by two random-walk suprema.
+\end{remark}
+
+\section*{Acknowledgments and funding}
+
+The research presented in this paper was supported by the European Research Council (ERC) under the European Union's Horizon Europe research and innovation programme (grant agreement No.\ 101041711). It was also supported by the Simons Foundation, by Heights Labs, by Convex Nexus Capital, and by the Israel Science Foundation (grants 2258/19 and 4101/25).
+
+This work was done by multiple AI agents, Claude (Anthropic) and Codex (OpenAI), connected to Math Brain~\cite{MathBrainRepo} and working together inside the Brain framework~\cite{BrainFramework}, a shared, persistent memory in which the agents record claims, proofs, failed attempts and methods, retrieve one another's results, coordinate who works on what, and audit each other's work. The method is described in~\cite{MathBrainPaper}.
+
+\section*{Declaration of generative AI and AI-assisted technologies}
+
+This paper is part of a broader research project on proving open problems with AI systems. The criterion and its proof were found with Codex (OpenAI), and the text was drafted and the proofs checked with Claude (Anthropic), both working under the author's direction. The proof rests on the theory of activated random walk developed by Rolla, Sidoravicius and their coauthors and presented in the survey of Rolla \cite{Ro}, and on the theorem of Johnson and Richey \cite{JR}, whose tentative conjecture is settled here. The author directed the work and is responsible for the content of the paper and for decisions concerning its dissemination.
+
+\section*{Data availability}
+
+Data sharing is not applicable, as no datasets were generated or analysed.
+
+\section*{Declaration of competing interest}
+
+The author holds equity in Heights Labs and Convex Nexus Capital and has a management role at Convex Nexus Capital.
+
+\begin{thebibliography}{99}
+
+\bibitem{BP}
+A.~Bou-Rabee and C.~Panagiotis,
+Sharpness and critical scaling of parking,
+preprint (2026), \href{https://arxiv.org/abs/2609.02820}{arXiv:2609.02820v1}.
+
+\bibitem{BPS}
+A.~Bou-Rabee, Y.~Peres and E.~Sava-Huss,
+Divisible sandpiles via random walks in random scenery,
+preprint (2026), \href{https://arxiv.org/abs/2604.13968}{arXiv:2604.13968v1}.
+
+\bibitem{DRS}
+R.~Dickman, L.~T.~Rolla and V.~Sidoravicius,
+Activated random walkers: facts, conjectures and challenges,
+\emph{J. Stat. Phys.} \textbf{138} (2010), 126--142.
+\href{https://doi.org/10.1007/s10955-009-9918-7}{doi:10.1007/s10955-009-9918-7}.
+
+\bibitem{JR}
+T.~Johnson and J.~Richey,
+The odometer in subcritical activated random walk,
+\emph{Electron. Commun. Probab.} \textbf{31} (2026), article no.~74, 1--12.
+\href{https://doi.org/10.1214/26-ECP819}{doi:10.1214/26-ECP819}.
+
+\bibitem{Ro}
+L.~T.~Rolla,
+Activated random walks on $\Z^d$,
+\emph{Probab. Surv.} \textbf{17} (2020), 478--544.
+\href{https://doi.org/10.1214/19-PS339}{doi:10.1214/19-PS339}.
+
+\bibitem{KW}
+J.~Kiefer and J.~Wolfowitz,
+On the characteristics of the general queueing process, with applications to random walk,
+\emph{Ann. Math. Statist.} \textbf{27} (1956), 147--161.
+\href{https://doi.org/10.1214/aoms/1177728354}{doi:10.1214/aoms/1177728354}.
+
+\bibitem{RS}
+L.~T.~Rolla and V.~Sidoravicius,
+Absorbing-state phase transition for driven-dissipative stochastic dynamics on $\Z$,
+\emph{Invent. Math.} \textbf{188} (2012), 127--150.
+\href{https://doi.org/10.1007/s00222-011-0344-5}{doi:10.1007/s00222-011-0344-5}.
+
+\bibitem{RSZ}
+L.~T.~Rolla, V.~Sidoravicius and O.~Zindy,
+Universality and sharpness in activated random walks,
+\emph{Ann. Henri Poincar\'e} \textbf{20} (2019), 1823--1835.
+\href{https://doi.org/10.1007/s00023-019-00797-0}{doi:10.1007/s00023-019-00797-0}.
+
+\bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026, \url{https://github.com/yspennstate/math-brain-public}.
+
+\bibitem{MathBrainPaper} Y.~Shmalo, \emph{Math Brain: shared, auditable memory for multi-agent mathematical research}, October 2026, \url{https://github.com/yspennstate/math-brain-public/tree/main/papers/math-brain-2026-10-24}.
+
+\bibitem{BrainFramework} Y.~Shmalo, \emph{Brain Framework}, public software repository, 2026, \url{https://github.com/yspennstate/brain-framework-public}.
+
+\end{thebibliography}
+
+\end{document}
